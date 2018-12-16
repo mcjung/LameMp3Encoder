@@ -17,7 +17,7 @@ HOW TO BUILD
   1. Run Visual Studio 2017
   2. Open LameMp3Encoder.sln
   3. Build the solution
-    * (output: .\Output\Windows\LameMp3Encoder.exe)
+  * (output: .\Output\Windows\LameMp3Encoder.exe)
 
 USAGE
 -----
