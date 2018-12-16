@@ -1,14 +1,14 @@
 Multithreading Lame Mp3 Encoder
-==================================
-  
-  PREREQUISITES
-----------------------------------
+===============================
+
+PREREQUISITES
+-------------
 * LAME static library v3.100
   * Linux:   liblamemp3.a
   * Windows: libmp3lame-static.lib, libmpghip-static.lib
 
-  HOW TO BUILD
-----------------------------------
+HOW TO BUILD
+------------
 * Linux:
   * $ make
   * (output: ./Output/Linux/LameMp3Encoder)
@@ -18,9 +18,9 @@ Multithreading Lame Mp3 Encoder
   2. Open LameMp3Encoder.sln
   3. Build the solution
     * (output: .\Output\Windows\LameMp3Encoder.exe)
-     
-  USAGE
-----------------------------------
+
+USAGE
+-----
 * Linux:
   * $ ./LameMp3Encoder <wav_file_path>
         
