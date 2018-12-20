@@ -28,8 +28,6 @@ bool LameMp3Encoder::encode_wav(std::string &input)
 	std::ifstream wav;
 	std::ofstream mp3;
 
-	wav.exceptions(std::ifstream::failbit);
-	mp3.exceptions(std::ifstream::failbit);
 	try {	
 		wav.open(input, std::ios_base::binary | std::ios_base::in);
 		mp3.open(output, std::ios_base::binary | std::ios_base::out);

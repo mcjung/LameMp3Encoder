@@ -18,13 +18,11 @@ using namespace std;
 class Task
 {
 public:
-//  Task(TCLass::* obj_fn_ptr); // pass an object method pointer
-  Task(void (*fn_ptr)(void*), void* arg); // pass a free function pointer
+  Task(void (*fn_ptr)(void*), void* arg); 
   ~Task();
   void operator()();
   void run();
 private:
-//  TClass* _obj_fn_ptr;
   void (*m_fn_ptr)(void*);
   void* m_arg;
 };

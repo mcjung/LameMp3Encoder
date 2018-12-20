@@ -7,7 +7,7 @@ Mutex::Mutex() {
 
 Mutex::~Mutex() {
   while(is_locked);
-  unlock(); // Unlock Mutex after shared resource is safe
+  unlock();
   pthread_mutex_destroy(&m_lock);
 }
 
@@ -17,7 +17,7 @@ void Mutex::lock() {
 }
 
 void Mutex::unlock() {
-  is_locked = false; // do it BEFORE unlocking to avoid race condition
+  is_locked = false; 
   pthread_mutex_unlock(&m_lock);
 }
 

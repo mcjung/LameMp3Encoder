@@ -31,7 +31,7 @@ private:
   int m_pool_size;
   Mutex m_task_mutex;
   CondVar m_task_cond_var;
-  std::vector<pthread_t> m_threads; // storage for threads
+  std::vector<pthread_t> m_threads;
   std::deque<Task*> m_tasks;
   volatile int m_pool_state;
 };
