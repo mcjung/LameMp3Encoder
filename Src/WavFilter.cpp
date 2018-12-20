@@ -1,12 +1,5 @@
 #include "WavFilter.h"
 
-#ifdef WIN32
-#define PATH_DELIMETER "\\"
-#define MAX_DIR_LEN 260
-#else
-#define PATH_DELIMETER "/"
-#endif
-
 using namespace std;
 
 WavFilter::WavFilter() {}
@@ -80,15 +73,15 @@ std::vector<std::string> WavFilter::read_directory(const std::string &path, cons
 #ifdef WIN32
 LPWSTR WavFilter::mbs_to_wcs(const char *mbstr) {
 	size_t length;
-	static wchar_t wtext[MAX_DIR_LEN] = { 0, };
-	mbstowcs_s(&length, wtext, (size_t)MAX_DIR_LEN, mbstr, (size_t)MAX_DIR_LEN);
+	static wchar_t wtext[PATH_MAX] = { 0, };
+	mbstowcs_s(&length, wtext, (size_t)PATH_MAX, mbstr, (size_t)PATH_MAX);
 	return wtext;
 }
 
 char* WavFilter::wcs_to_mbs(const LPWSTR wcstr) {
 	size_t   length;
-	static char text[MAX_DIR_LEN] = { 0, };
-	wcstombs_s(&length, text, (size_t)MAX_DIR_LEN, wcstr, (size_t)MAX_DIR_LEN);
+	static char text[PATH_MAX] = { 0, };
+	wcstombs_s(&length, text, (size_t)PATH_MAX, wcstr, (size_t)PATH_MAX);
 	return text;
 }
 #endif 

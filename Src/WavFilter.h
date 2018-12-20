@@ -16,6 +16,14 @@
 #include <dirent.h>
 #endif 
 
+#ifdef WIN32
+#define PATH_DELIMETER "\\"
+#define PATH_MAX 260
+#else
+#define PATH_DELIMETER "/"
+#define PATH_MAX 4096
+#endif
+
 class WavFilter {
 public:
 	WavFilter();

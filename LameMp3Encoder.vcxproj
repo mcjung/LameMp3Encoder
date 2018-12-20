@@ -92,11 +92,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Workspace\LameMp3Encoder\pthread-win-prebuilt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>C:\Workspace\LameMp3Encoder\pthread-win-prebuilt\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pthreadVC2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,6 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Workspace\LameMp3Encoder\pthread-win-prebuilt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -126,6 +130,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>C:\Workspace\LameMp3Encoder\pthread-win-prebuilt\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pthreadVC2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,14 +151,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\CondVar.cpp" />
     <ClCompile Include="Src\LameMp3Encoder.cpp" />
     <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Mutex.cpp" />
+    <ClCompile Include="Src\Task.cpp" />
+    <ClCompile Include="Src\ThreadPool.cpp" />
     <ClCompile Include="Src\WavFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\CondVar.h" />
+    <ClInclude Include="Src\Global.h" />
     <ClInclude Include="Src\LameMp3Encoder.h" />
     <ClInclude Include="Src\lame\lame.h" />
-    <ClInclude Include="Src\SafeQueue.h" />
+    <ClInclude Include="Src\Mutex.h" />
+    <ClInclude Include="Src\Task.h" />
     <ClInclude Include="Src\ThreadPool.h" />
     <ClInclude Include="Src\WavFilter.h" />
   </ItemGroup>
