@@ -2,10 +2,8 @@
 #include <fstream>
 #include <string.h>
 
+#include "WavParser.h"
 #include "LameMp3Encoder.h"
-
-#define NUM_CHANNEL 2
-#define DEFAULT_SAMPLERATE 44100 
 
 using namespace std;
 
@@ -14,13 +12,15 @@ LameMp3Encoder::~LameMp3Encoder() {}
 
 bool LameMp3Encoder::encode_wav(std::string &input)
 {
-	const size_t IN_SAMPLERATE = DEFAULT_SAMPLERATE;
+	WavParser parser(input);
+
+	const size_t IN_SAMPLERATE = parser.get_sample_rate();
 	const size_t PCM_SIZE = 8192;
 	const size_t MP3_SIZE = 8192;
 	const size_t LAME_GOOD = 5;
-	int16_t pcm_buffer[PCM_SIZE * NUM_CHANNEL];
-	unsigned char mp3_buffer[MP3_SIZE];
-	const size_t bytes_per_sample = NUM_CHANNEL * sizeof(int16_t);
+	int16_t *pcm_buffer = new int16_t[PCM_SIZE * parser.get_channels()];
+	unsigned char *mp3_buffer = new unsigned char [MP3_SIZE];
+	const size_t bytes_per_sample = parser.get_channels() * parser.get_bits_per_sample() / 8;
 	const string ext = { "mp3" };
 
 	string output(input);
@@ -59,5 +59,8 @@ bool LameMp3Encoder::encode_wav(std::string &input)
 	mp3.close();
 
 	lame_close(lame);
+
+	delete [] pcm_buffer;
+	delete [] mp3_buffer;
 	return true;
 }
