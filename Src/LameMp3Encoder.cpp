@@ -32,6 +32,7 @@ bool LameMp3Encoder::encode_wav(std::string &input)
 
 	try {	
 		wav.open(input, std::ios_base::binary | std::ios_base::in);
+		wav.seekg(44, ios_base::beg); //to remove click sound 
 		mp3.open(output, std::ios_base::binary | std::ios_base::out);
 	}
 	catch (std::ifstream::failure e) {
