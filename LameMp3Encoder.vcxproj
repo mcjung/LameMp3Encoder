@@ -148,6 +148,7 @@
     <ClCompile Include="Src\LameMp3Encoder.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\WavFilter.cpp" />
+    <ClCompile Include="Src\WavParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\LameMp3Encoder.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Src\SafeQueue.h" />
     <ClInclude Include="Src\ThreadPool.h" />
     <ClInclude Include="Src\WavFilter.h" />
+    <ClInclude Include="Src\WavParser.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Lib\Windows\libmp3lame-static.lib" />
