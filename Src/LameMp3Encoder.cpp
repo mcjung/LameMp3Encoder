@@ -19,7 +19,6 @@ bool LameMp3Encoder::encode_wav(std::string &input)
 	const size_t MP3_SIZE = 8192;
 	const size_t LAME_GOOD = 5;
 	int16_t *pcm_buffer = new int16_t[PCM_SIZE * parser.get_channels()];
-	unsigned char *pcm_buffer8 = new unsigned char[PCM_SIZE * parser.get_channels()];
 	unsigned char *mp3_buffer = new unsigned char [MP3_SIZE];
 	const size_t bytes_per_sample = parser.get_channels() * parser.get_bits_per_sample() / 8;
 	const string ext = { "mp3" };
