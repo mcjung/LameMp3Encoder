@@ -14,9 +14,9 @@ HOW TO BUILD
   * (output: ./Output/Linux/LameMp3Encoder)
         
 * Windows:
-  1. Run Visual Studio 2017
-  2. Open LameMp3Encoder.sln
-  3. Build the solution
+  * Run Visual Studio 2017
+  * Open LameMp3Encoder.sln
+  * Build the solution
   * (output: .\Output\Windows\LameMp3Encoder.exe)
 
 USAGE
@@ -25,4 +25,4 @@ USAGE
   * $ ./LameMp3Encoder <wav_file_path>
         
 * Windows:
-  * C:\>LameMp3Encoder.exe <wav_file_path>
+  * C:\\>LameMp3Encoder.exe <wav_file_path>
