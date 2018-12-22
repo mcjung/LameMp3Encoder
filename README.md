@@ -27,4 +27,4 @@ USAGE
   * $ ./LameMp3Encoder <wav_file_path>
         
 * Windows:
-  * C:\>LameMp3Encoder.exe <wav_file_path>
+  * C:\\>LameMp3Encoder.exe <wav_file_path>
