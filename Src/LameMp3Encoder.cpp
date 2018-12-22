@@ -20,7 +20,8 @@ bool LameMp3Encoder::encode_wav(std::string &input)
 	const size_t LAME_GOOD = 5;
 	const size_t NUM_CHANNELS = parser.get_channels();
 	const size_t BITS_PER_SAMPLE = parser.get_bits_per_sample();
-	int16_t *pcm_buffer = new int16_t[PCM_SIZE * NUM_CHANNELS];
+	int16_t *pcm_buffer16 = new int16_t[PCM_SIZE * NUM_CHANNELS];
+	unsigned char *pcm_buffer8 = new unsigned char[PCM_SIZE * NUM_CHANNELS];
 	unsigned char *mp3_buffer = new unsigned char [MP3_SIZE];
 	const size_t bytes_per_sample = NUM_CHANNELS * BITS_PER_SAMPLE / 8;
 	const string ext = { "mp3" };
@@ -59,17 +60,32 @@ bool LameMp3Encoder::encode_wav(std::string &input)
 	if (lame_init_params(lame) >= 0) {
 		while (wav.good()) {
 			int write = 0;
-			wav.read(reinterpret_cast<char*>(pcm_buffer), sizeof(pcm_buffer));
-			int read = wav.gcount() / bytes_per_sample;
-			if (read == 0)
+			int read = 0;
+			if (BITS_PER_SAMPLE == 8) {
+				wav.read(reinterpret_cast<char*>(pcm_buffer8), sizeof(pcm_buffer8));
+				read = wav.gcount() / bytes_per_sample;
+
+				for (int i = 0; i < read; i++) {
+					pcm_buffer16[i] = (short)(pcm_buffer8[i] - 0x80) << 8;
+				}
+			} 
+			else if (BITS_PER_SAMPLE == 16) {
+				wav.read(reinterpret_cast<char*>(pcm_buffer16), sizeof(pcm_buffer16));
+				read = wav.gcount() / bytes_per_sample;
+			}
+			else {
+				std::cout << "Unsupported bits_per_sample" << std::endl;
+			}
+
+ 			if (read == 0)
 				write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
 			else
 			{
 				if (NUM_CHANNELS == 1) {
-					write = lame_encode_buffer(lame, pcm_buffer, NULL, read, mp3_buffer, MP3_SIZE);
+					write = lame_encode_buffer(lame, pcm_buffer16, NULL, read, mp3_buffer, MP3_SIZE);
 				}
 				else if (NUM_CHANNELS == 2) {
-					write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+					write = lame_encode_buffer_interleaved(lame, pcm_buffer16, read, mp3_buffer, MP3_SIZE);
 				}
 				else {
 					std::cout << "Unsupported channel" << std::endl;
@@ -85,7 +101,8 @@ bool LameMp3Encoder::encode_wav(std::string &input)
 
 	lame_close(lame);
 
-	delete [] pcm_buffer;
+	delete [] pcm_buffer16;
+	delete[] pcm_buffer8;
 	delete [] mp3_buffer;
 	return true;
 }
